@@ -1,0 +1,118 @@
+<html lang="en">
+	<head>
+    <meta charset="utf-8">
+    <title>Sign in · Twitter Bootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Styles -->
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/sticky-footer.css" rel="stylesheet">
+
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="../ico/favicon.png">
+  </head>
+
+  <body style="padding-top:50px;">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    Frilp Live Feed
+  </div>
+</nav>
+		<div class="container12" style="height:100%; float:right;">
+
+		  
+			<div class="col-xs-12 divider text-center" style="border-bottom: 1px solid #eee;">
+			                <div class="col-xs-12 col-sm-4 emphasis">
+			                    <h2><strong id="request_count"> 0 </strong></h2>                    
+			                    <p><small>Questions</small></p>
+			                </div>
+			                <div class="col-xs-12 col-sm-4 emphasis">
+			                    <h2><strong id="recommendation_count">0</strong></h2>                    
+			                    <p><small>Recommendations</small></p>
+			                </div>
+			                <div class="col-xs-12 col-sm-4 emphasis">
+			                    <h2><strong id="comment_count">0</strong></h2>                    
+			                    <p><small>Comments</small></p>
+			                </div>
+			</div>
+					  
+		  <div id="base">
+      	  </div>
+		</div>
+	  <script type="text/html" id="template_feed_main">
+	  	<div style="margin-top: 100px;">
+	  		<h4 style="text-align: center; color: #D37575;">Live Feed</h4>
+	  		<div id="content" style="overflow:hidden; max-height: 60%"></div>
+	  	</div>
+	  </script>
+	  <script type="text/html" id="template_feed_card_request">
+	  	<div class="feed_card">
+	  		<p>
+	  			<span class="label label-primary">Q</span>&nbsp;
+	  			<a href="http://localhost/userprofile/<%= card_params.creator_id %>"><%= card_params.creator_name %></a>&nbsp;
+	  			has posted a question under <strong><%= card_params.category_name %></strong>&nbsp;
+	  			<p><h5><em><%= card_params.message.substr(0,50) %></em></h5></p>
+	  			<h5><small class="card_timestamp" data_time="<%= card_params.timestamp.substr(0,card_params.timestamp.length-4)+'z' %>">
+	  					<%= $.timeago(card_params.timestamp.substr(0,card_params.timestamp.length-4)+'z') %>
+	  				</small>
+	  			</h5>
+	  		</p>
+	  	</div>
+	  </script>
+	  
+	  <script type="text/html" id="template_feed_card_recommendation">
+	  	<div class="feed_card">
+	  		<p>
+	  			<span class="label label-success">R</span>&nbsp;
+	  			<a href="http://localhost/userprofile/<%= card_params.creator_id %>"><%= card_params.creator_name %></a>&nbsp;
+	  			has posted a recommendation under <strong><%= card_params.category_name %></strong>&nbsp;
+	  			<p><h5><em><%= card_params.message.substr(0,50) %></em></h5></p>
+	  			<h5><small class="card_timestamp" data_time="<%= card_params.timestamp.substr(0,card_params.timestamp.length-4)+'z' %>">
+	  					<%= $.timeago(card_params.timestamp.substr(0,card_params.timestamp.length-4)+'z') %>
+	  				</small>
+	  			</h5>
+	  		</p>
+	  	</div>
+	  </script>
+	 
+	  <script type="text/html" id="template_feed_card_comment">
+	  	<div class="feed_card">
+	  		<p>
+	  			<span class="label label-warning">C</span>&nbsp;
+	  			<a href="http://localhost/userprofile/<%= card_params.creator_id %>"><%= card_params.creator_name %></a>&nbsp;
+	  			has posted a comment&nbsp;
+	  			<p><h5><em><%= card_params.message.substr(0,50) %></em></h5></p>
+	  			<h5><small class="card_timestamp" data_time="<%= card_params.timestamp.substr(0,card_params.timestamp.length-4)+'z' %>">
+	  					<%= $.timeago(card_params.timestamp.substr(0,card_params.timestamp.length-4)+'z') %>
+	  				</small>
+	  			</h5>
+	  		</p>
+	  	</div>
+	  </script>
+
+    <!-- Javascript -->
+    <!-- Placed at the end of the document so that the page will load faster -->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/underscore.js"></script>
+    <script src="../js/backbone.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/backbone/app.js"></script>
+    <script src="../js/moment.min.js"></script>
+    <script src="../js/jquery.timeago.js"></script>
+    <script src="../js/countUp.min.js"></script>
+    <script src="../js/backbone/views/public/splash_view.js"></script>
+    <script src="../js/backbone/views/core/home_view.js"></script>
+	<script src="../js/backbone/routers/public_router.js"></script>
+	<script src="../js/backbone/routers/core_router.js"></script>
+	<script src="../js/backbone/initializer.js"></script>
+	<!--<script src="../css/bootstrap.css"></script>-->
+  
+
+</body>
+</html>
