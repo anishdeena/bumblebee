@@ -15,6 +15,7 @@
       this.ENTITY_TYPE_RECOMMENDATION = "15";
       this.ENTITY_TYPE_QUESTION = "14";
       this.ENTITY_TYPE_COMMENT = "16";
+      this.ENTITY_TYPE_BUSINESS = "2";
       this.MAX_SIZE = 15;
       this.count = 0;
       this.activities_container = [];
@@ -50,13 +51,21 @@
     };
 
     SplashView.prototype.updateAllActivityCount = function(activity_params) {
-      var comAnim, recAnim, reqAnim;
-      reqAnim = new countUp("request_count", 0, activity_params.request_count, 0, 1.5);
+      var busAnim, comAnim, recAnim, reqAnim;
+      reqAnim = new countUp("request_count", 0, activity_params.request_count, 0, 0.5);
       recAnim = new countUp("recommendation_count", 0, activity_params.recommendation_count, 0, 1.5);
-      comAnim = new countUp("comment_count", 0, activity_params.comment_count, 0, 1.5);
+      comAnim = new countUp("comment_count", 0, activity_params.comment_count, 0, 1.0);
+      busAnim = new countUp("business_count", 0, activity_params.business_count, 0, 1.0);
       reqAnim.start();
       recAnim.start();
-      return comAnim.start();
+      comAnim.start();
+      return busAnim.start();
+    };
+
+    SplashView.prototype.updateCount = function(count_params) {
+      if (count_params.type = this.ENTITY_TYPE_BUSINESS) {
+        return $("#business_count").html(count_params.count);
+      }
     };
 
     SplashView.prototype.setupSocketClient = function() {
@@ -76,13 +85,18 @@
           return _this.enableTimeUpdate();
         };
       })(this));
-      return this.socket.on('feed', (function(_this) {
+      this.socket.on('feed', (function(_this) {
         return function(card_params) {
           var card;
           _this.activities_container[_this.count % _this.MAX_SIZE] = card_params;
           _this.count = _this.count + 1;
           card = _this.constructCard(card_params);
           return $(_this.content).prepend(card);
+        };
+      })(this));
+      return this.socket.on('count', (function(_this) {
+        return function(count_params) {
+          return _this.updateCount(count_params);
         };
       })(this));
     };

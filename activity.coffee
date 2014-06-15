@@ -9,9 +9,11 @@ module.exports = () ->
       @ENTITY_TYPE_QUESTION = "14"
       @ENTITY_TYPE_RECOMMENDATION = "15"
       @ENTITY_TYPE_COMMENT = "16"
+      @ENTITY_TYPE_BUSINESS = "2"
       @request_count = 0
       @recommendation_count = 0
-      @comment_count = 0     
+      @comment_count = 0
+      @entity_count_hash = {}     
 
     saveActivity: (activity) ->
       if activity.activity_type == @ENTITY_TYPE_QUESTION
@@ -30,6 +32,16 @@ module.exports = () ->
           @activities[i-1] = @activities[i]
           i++
         @activities[i-1] = activity
+        
+    saveCount: (count_params) ->
+      if count_params.type == @ENTITY_TYPE_BUSINESS
+        @entity_count_hash[@ENTITY_TYPE_BUSINESS] = count_params.count
       
     getActivities: () ->
-      return {activities: @activities, request_count: @request_count, recommendation_count: @recommendation_count, comment_count: @comment_count}
+      return {
+        activities: @activities, 
+        request_count: @request_count, 
+        recommendation_count: @recommendation_count, 
+        comment_count: @comment_count, 
+        business_count: @entity_count_hash[@ENTITY_TYPE_BUSINESS]
+      }

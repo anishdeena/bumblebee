@@ -13,6 +13,7 @@ app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded()); // to support URL-encoded bodies
 require('./routes')(app, io, activity);
 app.use("/css", express.static(__dirname + '/css'));
+app.use("/fonts", express.static(__dirname + '/fonts'));
 app.use("/templates", express.static(__dirname + '/templates'));
 app.use("/js", express.static(__dirname + '/js'));
 app.use("/coffee", express.static(__dirname + '/coffee'));

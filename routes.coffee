@@ -13,3 +13,9 @@ module.exports = (app, io, activity) ->
     res.send(200, req.body)
     io.sockets.emit("feed", req.body)  
   )
+  
+  app.post('/count', (req, res) ->
+    activity.saveCount(req.body)
+    res.send(200, req.body)
+    io.sockets.emit("count", req.body)  
+  )

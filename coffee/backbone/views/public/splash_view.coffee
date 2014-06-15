@@ -10,6 +10,7 @@ class App.Views.Public.SplashView extends Backbone.View
     @ENTITY_TYPE_RECOMMENDATION = "15"
     @ENTITY_TYPE_QUESTION = "14"
     @ENTITY_TYPE_COMMENT = "16"
+    @ENTITY_TYPE_BUSINESS= "2"
     @MAX_SIZE = 15
     @count = 0
     @activities_container = []
@@ -36,12 +37,18 @@ class App.Views.Public.SplashView extends Backbone.View
     #$("#request_count").html(activity_params.request_count)
     #$("#recommendation_count").html(activity_params.recommendation_count)
     #$("#comment_count").html(activity_params.comment_count)
-    reqAnim = new countUp("request_count", 0, activity_params.request_count, 0, 1.5)
+    reqAnim = new countUp("request_count", 0, activity_params.request_count, 0, 0.5)
     recAnim = new countUp("recommendation_count", 0, activity_params.recommendation_count, 0, 1.5)
-    comAnim = new countUp("comment_count", 0, activity_params.comment_count, 0, 1.5)
+    comAnim = new countUp("comment_count", 0, activity_params.comment_count, 0, 1.0)
+    busAnim = new countUp("business_count", 0, activity_params.business_count, 0, 1.0)
     reqAnim.start()
     recAnim.start()
     comAnim.start()
+    busAnim.start()
+    
+  updateCount: (count_params) ->
+    if count_params.type = @ENTITY_TYPE_BUSINESS
+      $("#business_count").html(count_params.count)
     
   setupSocketClient: () ->
     
@@ -65,6 +72,11 @@ class App.Views.Public.SplashView extends Backbone.View
         @count = @count + 1     
         card = @constructCard(card_params)
         $(@content).prepend(card)        
+    )
+    
+    @socket.on('count',
+      (count_params) =>
+        @updateCount(count_params)        
     )
     
   updateTime: () ->
