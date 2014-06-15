@@ -9,6 +9,7 @@ module.exports = (app, io, activity) ->
   )
   
   app.post('/feed', (req, res) ->
+    console.log("got data")
     activity.saveActivity(req.body)
     res.send(200, req.body)
     io.sockets.emit("feed", req.body)  
