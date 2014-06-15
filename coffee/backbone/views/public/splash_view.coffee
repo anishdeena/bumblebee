@@ -115,7 +115,7 @@ class App.Views.Public.SplashView extends Backbone.View
     $(@el).append(template())
     
     $("#" + @render_element).html(@el)
-    @socket = io.connect("http://ec2-54-87-19-224.compute-1.amazonaws.com:3001")
+    @socket = io.connect("http://ec2-54-87-19-224.compute-1.amazonaws.com")
     @content = $("#content")
     $("abbr.timeago").timeago()
     @setupSocketClient()
