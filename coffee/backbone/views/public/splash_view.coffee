@@ -11,6 +11,9 @@ class App.Views.Public.SplashView extends Backbone.View
     @ENTITY_TYPE_QUESTION = "14"
     @ENTITY_TYPE_COMMENT = "16"
     @ENTITY_TYPE_BUSINESS= "2"
+    @ENTITY_TYPE_LOCATION = "3"
+    @ENTITY_TYPE_CATEGORY = "4"
+    @ENTITY_TYPE_USER= "5"
     @MAX_SIZE = 15
     @count = 0
     @activities_container = []
@@ -41,14 +44,26 @@ class App.Views.Public.SplashView extends Backbone.View
     recAnim = new countUp("recommendation_count", 0, activity_params.recommendation_count, 0, 1.5)
     comAnim = new countUp("comment_count", 0, activity_params.comment_count, 0, 1.0)
     busAnim = new countUp("business_count", 0, activity_params.business_count, 0, 1.0)
+    usrAnim = new countUp("user_count", 0, activity_params.user_count, 0, 1.0)
+    catAnim = new countUp("category_count", 0, activity_params.category_count, 0, 1.0)
+    locAnim = new countUp("location_count", 0, activity_params.location_count, 0, 1.0)
     reqAnim.start()
     recAnim.start()
     comAnim.start()
     busAnim.start()
+    usrAnim.start()
+    catAnim.start()
+    locAnim.start()
     
   updateCount: (count_params) ->
-    if count_params.type = @ENTITY_TYPE_BUSINESS
+    if count_params.type == @ENTITY_TYPE_BUSINESS
       $("#business_count").html(count_params.count)
+    if count_params.type == @ENTITY_TYPE_USER
+      $("#user_count").html(count_params.count)
+    if count_params.type == @ENTITY_TYPE_CATEGORY
+      $("#category_count").html(count_params.count)
+    if count_params.type == @ENTITY_TYPE_LOCATION
+      $("#location_count").html(count_params.count)           
     
   setupSocketClient: () ->
     
