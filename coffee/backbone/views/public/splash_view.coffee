@@ -94,6 +94,11 @@ class App.Views.Public.SplashView extends Backbone.View
         @updateCount(count_params)        
     )
     
+    @socket.on('ping',
+      (data) =>
+        alert(data)        
+    )
+    
   updateTime: () ->
     $(".card_timestamp").each(
       () ->

@@ -112,9 +112,14 @@
           return $(_this.content).prepend(card);
         };
       })(this));
-      return this.socket.on('count', (function(_this) {
+      this.socket.on('count', (function(_this) {
         return function(count_params) {
           return _this.updateCount(count_params);
+        };
+      })(this));
+      return this.socket.on('ping', (function(_this) {
+        return function(data) {
+          return alert(data);
         };
       })(this));
     };

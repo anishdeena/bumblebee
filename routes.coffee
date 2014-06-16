@@ -8,6 +8,11 @@ module.exports = (app, io, activity) ->
     res.send("You have hit about!")
   )
   
+  app.get('/ping', (req, res)->
+    res.send(200)
+    io.sockets.emit("ping", "I got it!")
+  )
+  
   app.post('/feed', (req, res) ->
     #console.log("got data")
     activity.saveActivity(req.body)
