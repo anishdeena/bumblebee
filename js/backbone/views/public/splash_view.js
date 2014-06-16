@@ -141,7 +141,7 @@
       template = _.template($("#template_feed_main").html());
       $(this.el).append(template());
       $("#" + this.render_element).html(this.el);
-      this.socket = io.connect("http://localhost:3001");
+      this.socket = io();
       this.content = $("#content");
       $("abbr.timeago").timeago();
       this.setupSocketClient();
